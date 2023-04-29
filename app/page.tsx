@@ -16,7 +16,7 @@ export default function Home() {
 		event.preventDefault();
 		const results = await searchMoviesByTitle(searchQuery);
 		console.log(results, "results");
-		setSearchResults(results);
+		if (results) setSearchResults(results);
 	};
 
 	return (
@@ -31,10 +31,9 @@ export default function Home() {
 			</form>
 
 			<ul>
-				{searchResults &&
-					searchResults.map((movie) => (
-						<li key={movie.imdbID}>{movie.Title}</li>
-					))}
+				{searchResults.map((movie) => (
+					<li key={movie.imdbID}>{movie.Title}</li>
+				))}
 			</ul>
 		</>
 	);

@@ -1,5 +1,9 @@
 "use client";
-import { searchMoviesByTitle, Movie } from "./api/movies/route";
+import {
+	searchMoviesByTitle,
+	Movie,
+	searchMoviesByID,
+} from "./api/movies/route";
 
 // export const metadata = {
 // 	title: "Movie Night",

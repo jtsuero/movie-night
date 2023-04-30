@@ -17,18 +17,19 @@ interface MovieResultsProps {
 
 export default function MovieResults(props: MovieResultsProps) {
 	return (
-		<ul>
+		<ul
+			style={{
+				display: "flex",
+				flexDirection: "row",
+				width: "100%",
+				flexWrap: "wrap",
+				justifyContent: "center",
+			}}
+		>
 			{props.searchResults.map((movie) => (
-				<li key={movie.imdbID}>
+				<div key={movie.imdbID}>
 					<Flex p={50} w='full' alignItems='center' justifyContent='center'>
-						<Box
-							bg={useColorModeValue("white", "gray.800")}
-							maxW='sm'
-							borderWidth='1px'
-							rounded='lg'
-							shadow='lg'
-							position='relative'
-						>
+						<Box maxW='sm' rounded='lg' shadow='lg' position='relative'>
 							<Tooltip
 								label='Bookmark'
 								bg='white'
@@ -60,7 +61,7 @@ export default function MovieResults(props: MovieResultsProps) {
 							</Box>
 						</Box>
 					</Flex>
-				</li>
+				</div>
 			))}
 		</ul>
 	);

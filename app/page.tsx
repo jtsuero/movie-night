@@ -7,17 +7,22 @@ import { Movie, searchMoviesByTitle } from "./api/movies/route";
 import SearchBar from "./components/SearchBar";
 
 export default function Home() {
-	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResults, setSearchResults] = useState<Movie[]>([]);
 
 	const handleSearch = async (movieName: string) => {
-		const results = await searchMoviesByTitle(movieName);
+		const results: Movie[] | undefined = await searchMoviesByTitle(movieName);
 		if (results) setSearchResults(results);
 	};
 
+	//need component for search results.
 	return (
 		<>
 			<SearchBar handleSearch={handleSearch} />
+			<ul>
+				{searchResults.map((movie) => (
+					<li key={movie.imdbID}>{movie.Title}</li>
+				))}
+			</ul>
 		</>
 	);
 }

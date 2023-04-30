@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-}
+	experimental: {
+		appDir: true,
+	},
+	env: {
+		API_KEY: process.env.API_KEY,
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

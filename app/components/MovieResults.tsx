@@ -1,4 +1,4 @@
-"use client";
+import { useState } from "react";
 import {
 	Box,
 	Flex,
@@ -8,7 +8,7 @@ import {
 	chakra,
 	useColorModeValue,
 } from "@chakra-ui/react";
-import { BsBookmark } from "react-icons/bs";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { Movie } from "../api/movies/route";
 
 interface MovieResultsProps {
@@ -16,6 +16,16 @@ interface MovieResultsProps {
 }
 
 export default function MovieResults(props: MovieResultsProps) {
+	const [bookmarkedMovies, setBookmarkedMovies] = useState<string[]>([]);
+
+	const handleBookmarkClick = (movie: Movie) => {
+		if (bookmarkedMovies.includes(movie.imdbID)) {
+			setBookmarkedMovies(bookmarkedMovies.filter((id) => id !== movie.imdbID));
+		} else {
+			setBookmarkedMovies([...bookmarkedMovies, movie.imdbID]);
+		}
+	};
+
 	return (
 		<ul
 			style={{
@@ -45,8 +55,13 @@ export default function MovieResults(props: MovieResultsProps) {
 									right={2}
 									zIndex={1}
 									color={"white"}
+									onClick={() => handleBookmarkClick(movie)}
 								>
-									<Icon as={BsBookmark} h={7} w={7} alignSelf={"center"} />
+									{bookmarkedMovies.includes(movie.imdbID) ? (
+										<Icon as={BsBookmarkFill} h={7} w={7} alignSelf='center' />
+									) : (
+										<Icon as={BsBookmark} h={7} w={7} alignSelf='center' />
+									)}
 								</chakra.a>
 							</Tooltip>
 							<Box

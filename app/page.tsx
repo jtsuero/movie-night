@@ -19,7 +19,6 @@ export default function Home() {
 	const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const results = await searchMoviesByTitle(searchQuery);
-		console.log(results, "results");
 		if (results) setSearchResults(results);
 	};
 

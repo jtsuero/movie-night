@@ -1,3 +1,6 @@
+const apiKey = process.env.API_KEY;
+const axios = require("axios");
+
 export interface Movie {
 	Title: string;
 	Year: string;
@@ -6,14 +9,17 @@ export interface Movie {
 	Poster: string;
 }
 
-const apiKey = process.env.API_KEY;
-
 export async function searchMoviesByTitle(
 	title: string
 ): Promise<Movie[] | undefined> {
-	const url = `https://movie-database-alternative.p.rapidapi.com/?s=${title}&r=json&page=1`;
 	const options = {
 		method: "GET",
+		url: "https://movie-database-alternative.p.rapidapi.com/",
+		params: {
+			s: `${title}`,
+			r: "json",
+			page: "1",
+		},
 		headers: {
 			"content-type": "application/octet-stream",
 			"X-RapidAPI-Key": apiKey,
@@ -22,22 +28,21 @@ export async function searchMoviesByTitle(
 	};
 
 	try {
-		const response = await fetch(url, options);
-		const result = await response.json();
-		const movies = result.Search;
-
-		if (!movies) throw new Error(`No movies found with title "${title}"`);
-
-		return movies;
+		const response = await axios.request(options);
+		return response.data.Search;
 	} catch (error) {
 		console.error(error);
 	}
 }
 
 export async function searchMoviesByID(id: string): Promise<any> {
-	const url = `https://movie-database-alternative.p.rapidapi.com/?r=json&i=${id}`;
 	const options = {
 		method: "GET",
+		url: "https://movie-database-alternative.p.rapidapi.com/",
+		params: {
+			r: "json",
+			i: id,
+		},
 		headers: {
 			"content-type": "application/octet-stream",
 			"X-RapidAPI-Key": apiKey,
@@ -46,10 +51,9 @@ export async function searchMoviesByID(id: string): Promise<any> {
 	};
 
 	try {
-		const response = await fetch(url, options);
-		const result = await response.json();
-		if (!result) throw new Error("No movies found with that id");
-		return result;
+		const response = await axios.request(options);
+		if (!response) throw new Error("No movies found with that id");
+		return response.data;
 	} catch (error) {
 		console.error(error);
 	}

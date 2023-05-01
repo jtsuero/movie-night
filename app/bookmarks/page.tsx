@@ -50,7 +50,7 @@ export default function Bookmarks() {
 						Bookmarks
 					</Text>
 				) : (
-					<Stack>
+					<Stack align={"center"}>
 						<Text fontSize={25} fontFamily={"monospace"}>
 							Hmm...doesn't look like you've bookmarked anything yet.
 						</Text>
@@ -65,6 +65,7 @@ export default function Bookmarks() {
 								bg: "blue.500",
 							}}
 							type='submit'
+							w='50%'
 						>
 							Go to search
 						</Button>

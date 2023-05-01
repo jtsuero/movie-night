@@ -26,7 +26,7 @@ export default function Form(props: FormProps) {
 	return (
 		<form onSubmit={handleSubmit}>
 			<FormControl>
-				<Stack>
+				<Stack align={"center"}>
 					<InputGroup>
 						<Input
 							value={input}
@@ -53,6 +53,7 @@ export default function Form(props: FormProps) {
 							bg: "blue.500",
 						}}
 						type='submit'
+						w='50%'
 					>
 						Search
 					</Button>

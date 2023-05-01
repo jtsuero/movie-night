@@ -1,5 +1,5 @@
 "use client";
-import { Box, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import { Movie } from "../api/movies/app/api/search/[title]";
 import MovieCard from "../components/MovieCard";
 import { useMovieManager } from "../store";
@@ -50,9 +50,25 @@ export default function Bookmarks() {
 						Bookmarks
 					</Text>
 				) : (
-					<Text fontSize={25} fontFamily={"monospace"}>
-						Hmm...doesn't look like you've bookmarked anything yet.
-					</Text>
+					<Stack>
+						<Text fontSize={25} fontFamily={"monospace"}>
+							Hmm...doesn't look like you've bookmarked anything yet.
+						</Text>
+						<Button
+							as={Link}
+							href='/'
+							colorScheme={"blue"}
+							bg={"blue.400"}
+							rounded={"full"}
+							px={6}
+							_hover={{
+								bg: "blue.500",
+							}}
+							type='submit'
+						>
+							Go to search
+						</Button>
+					</Stack>
 				)}
 			</Heading>
 			<ul

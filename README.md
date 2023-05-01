@@ -2,6 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+clone repo - `https://github.com/jtsuero/movie-night.git`
 
 ```
 npm install

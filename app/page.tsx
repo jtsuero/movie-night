@@ -1,6 +1,3 @@
-// 	title: "Movie Night",
-// 	description: "What you watching?",
-// };
 "use client";
 import { useState } from "react";
 import { Movie, searchMoviesByTitle } from "./api/movies/route";
@@ -15,13 +12,6 @@ export default function Home() {
 		if (results) setSearchResults(results);
 	};
 
-	//state to select current movie
-
-	//need component for search results.
-	//nice to have to build out modal with more results for movie
-	//loading component while waiting on results
-	//when choosing items, should have bookmark ability
-	//create 'watched' for bookmarked movies only
 	return (
 		<>
 			<SearchBar handleSearch={handleSearch} />

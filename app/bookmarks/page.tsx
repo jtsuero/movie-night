@@ -1,6 +1,7 @@
 "use client";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Movie, searchMoviesByID } from "../api/movies/route";
+import { Movie } from "../api/movies/route";
 import MovieCard from "../components/MovieCard";
 
 export default function Bookmarks() {
@@ -16,18 +17,34 @@ export default function Bookmarks() {
 
 	console.log(bookmarkedMovies, "test bookmark");
 	return (
-		<ul
-			style={{
-				display: "flex",
-				flexDirection: "row",
-				width: "100%",
-				flexWrap: "wrap",
-				justifyContent: "center",
-			}}
+		<Stack
+			as={Box}
+			textAlign={"center"}
+			spacing={{ base: 8, md: 14 }}
+			py={{ base: 20, md: 36 }}
 		>
-			{bookmarkedMovies.map((movie) => (
-				<MovieCard key={movie.imdbID} movie={movie} />
-			))}
-		</ul>
+			<Heading
+				fontWeight={600}
+				fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+				lineHeight={"110%"}
+			>
+				<Text as={"span"} color={"red.700"}>
+					Bookmarks
+				</Text>
+			</Heading>
+			<ul
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					width: "100%",
+					flexWrap: "wrap",
+					justifyContent: "center",
+				}}
+			>
+				{bookmarkedMovies.map((movie) => (
+					<MovieCard key={movie.imdbID} movie={movie} />
+				))}
+			</ul>
+		</Stack>
 	);
 }

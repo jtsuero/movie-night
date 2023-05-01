@@ -1,6 +1,6 @@
 "use client";
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
-import { Movie } from "../api/movies/route";
+import { Movie } from "../api/movies/app/api/search/[title]";
 import MovieCard from "../components/MovieCard";
 import { useMovieManager } from "../store";
 

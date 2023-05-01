@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Movie } from "./api/movies/route";
+import { Movie } from "./api/movies/app/api/search/[title]";
 
 export function useMovieManager(
 	key: string

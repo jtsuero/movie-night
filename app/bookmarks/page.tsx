@@ -45,9 +45,15 @@ export default function Bookmarks() {
 				fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
 				lineHeight={"110%"}
 			>
-				<Text as={"span"} color={"red.700"}>
-					Bookmarks
-				</Text>
+				{bookmarkedMovies.length > 0 ? (
+					<Text fontSize={25} fontFamily={"monospace"}>
+						Bookmarks
+					</Text>
+				) : (
+					<Text fontSize={25} fontFamily={"monospace"}>
+						Hmm...doesn't look like you've bookmarked anything yet.
+					</Text>
+				)}
 			</Heading>
 			<ul
 				style={{

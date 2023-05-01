@@ -5,16 +5,6 @@ import Sidebar from "./components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const customTheme = extendTheme({
-	styles: {
-		global: {
-			body: {
-				bg: "white",
-			},
-		},
-	},
-});
-
 export default function RootLayout({
 	children,
 }: {
@@ -23,7 +13,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={inter.className}>
-				<ChakraProvider theme={customTheme}>
+				<ChakraProvider>
 					<Sidebar children={children} />
 				</ChakraProvider>
 			</body>

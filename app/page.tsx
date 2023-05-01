@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
-import { Movie, searchMoviesByTitle } from "./api/movies/route";
+import {
+	Movie,
+	searchMoviesByTitle,
+} from "./api/movies/app/api/search/[title]";
 import SearchBar from "./components/SearchBar";
 import MovieResults from "./components/MovieResults";
 

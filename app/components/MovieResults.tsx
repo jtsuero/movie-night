@@ -1,4 +1,4 @@
-import { Movie } from "../api/movies/route";
+import { Movie } from "../api/movies/app/api/search/[title]";
 import MovieCard from "./MovieCard";
 import { useMovieManager } from "../store";
 

@@ -11,7 +11,7 @@ import {
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { RiEyeFill, RiEyeLine } from "react-icons/ri";
 
-import { Movie } from "../api/movies/route";
+import { Movie } from "../api/movies/app/api/search/[title]";
 
 interface MovieCardProps {
 	movie: Movie;

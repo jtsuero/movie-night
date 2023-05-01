@@ -27,7 +27,14 @@ export default function MovieCard(props: MovieCardProps) {
 			<Flex p={50} w='full' alignItems='center' justifyContent='center'>
 				<Box maxW='sm' rounded='lg' shadow='lg' position='relative'>
 					<Tooltip
-						label='Bookmark'
+						label={
+							props.bookmarkedMovies.some(
+								(bookmarkedMovie) =>
+									bookmarkedMovie.imdbID === props.movie.imdbID
+							)
+								? "Remove"
+								: "Bookmark"
+						}
 						bg='white'
 						placement={"top"}
 						color={"gray.800"}

@@ -1,5 +1,4 @@
-import Head from "next/head";
-import { Box, Heading, Container, Text, Stack } from "@chakra-ui/react";
+import { Box, Container, Stack, Text } from "@chakra-ui/react";
 import Form from "./Form";
 
 interface SearchBarProps {

@@ -15,8 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode, ReactText } from "react";
 import { IconType } from "react-icons";
-import { BsBookmark } from "react-icons/bs";
-import { FiHome, FiMenu } from "react-icons/fi";
+import { BsBookmark, BsSearch } from "react-icons/bs";
+import { FiMenu } from "react-icons/fi";
 import { RiEyeLine } from "react-icons/ri";
 
 interface LinkItemProps {
@@ -25,7 +25,7 @@ interface LinkItemProps {
 	href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-	{ name: "Home", icon: FiHome, href: "/" },
+	{ name: "Home", icon: BsSearch, href: "/" },
 	{ name: "Bookmarks", icon: BsBookmark, href: "/bookmarks" },
 	{ name: "Watched", icon: RiEyeLine, href: "/watched" },
 ];

@@ -4,10 +4,9 @@ import { Movie } from "../api/movies/app/api/search/[title]";
 import MovieCard from "../components/MovieCard";
 import { useMovieManager } from "../store";
 
-export default function Bookmarks() {
+export default function Watched() {
 	const [bookmarkedMovies, addBookmarkedMovie, removeBookmarkedMovie] =
 		useMovieManager("bookmarkedMovies");
-
 	const [watchedMovies, addWatchedMovie, removeWatchedMovie] =
 		useMovieManager("watchedMovies");
 
@@ -45,14 +44,14 @@ export default function Bookmarks() {
 				fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
 				lineHeight={"110%"}
 			>
-				{bookmarkedMovies.length > 0 ? (
+				{watchedMovies.length > 0 ? (
 					<Text fontSize={25} fontFamily={"monospace"}>
-						Bookmarks
+						Watched
 					</Text>
 				) : (
 					<Stack align={"center"}>
 						<Text fontSize={25} fontFamily={"monospace"}>
-							Hmm...doesn't look like you've bookmarked anything yet.
+							Hmm...doesn't look like you've watched anything yet.
 						</Text>
 						<Button
 							as={Link}
@@ -81,7 +80,7 @@ export default function Bookmarks() {
 					justifyContent: "center",
 				}}
 			>
-				{bookmarkedMovies.map((movie) => (
+				{watchedMovies.map((movie) => (
 					<MovieCard
 						key={movie.imdbID}
 						movie={movie}

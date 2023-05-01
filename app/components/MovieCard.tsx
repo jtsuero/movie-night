@@ -1,3 +1,4 @@
+"use client";
 import {
 	Box,
 	Flex,
@@ -7,7 +8,7 @@ import {
 	chakra,
 	useColorModeValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { RiEyeFill, RiEyeLine } from "react-icons/ri";
 
@@ -34,45 +35,48 @@ export default function MovieCard(props: MovieCardProps) {
 		return [];
 	});
 
-	const handleBookmarkClick = (movie: Movie, button: string) => {
-		const isBookmarked = bookmarkedMovies.some(
-			(bookmarkedMovie) => bookmarkedMovie.imdbID === movie.imdbID
-		);
-		const isWatched = watchedMovies.some(
-			(watchedMovie) => watchedMovie.imdbID === movie.imdbID
-		);
-
-		if (button === "bookmark") {
+	const handleBookmarkClick = (movie: Movie) => {
+		setBookmarkedMovies((prevBookmarkedMovies) => {
+			const isBookmarked = prevBookmarkedMovies.some(
+				(bookmarkedMovie) => bookmarkedMovie.imdbID === movie.imdbID
+			);
 			if (isBookmarked) {
-				const newBookmarkedMovies = bookmarkedMovies.filter(
+				const newBookmarkedMovies = prevBookmarkedMovies.filter(
 					(bookmarkedMovie) => bookmarkedMovie.imdbID !== movie.imdbID
 				);
-				setBookmarkedMovies(newBookmarkedMovies);
 				localStorage.setItem(
 					"bookmarkedMovies",
 					JSON.stringify(newBookmarkedMovies)
 				);
+				return newBookmarkedMovies;
 			} else {
-				const newBookmarkedMovies = [...bookmarkedMovies, movie];
-				setBookmarkedMovies(newBookmarkedMovies);
+				const newBookmarkedMovies = [...prevBookmarkedMovies, movie];
 				localStorage.setItem(
 					"bookmarkedMovies",
 					JSON.stringify(newBookmarkedMovies)
 				);
+				return newBookmarkedMovies;
 			}
-		} else if (button === "watched") {
+		});
+	};
+
+	const handleWatchedClick = (movie: Movie) => {
+		setWatchedMovies((prevWatchedMovies) => {
+			const isWatched = prevWatchedMovies.some(
+				(watchedMovie) => watchedMovie.imdbID === movie.imdbID
+			);
 			if (isWatched) {
-				const newWatchedMovies = watchedMovies.filter(
+				const newWatchedMovies = prevWatchedMovies.filter(
 					(watchedMovie) => watchedMovie.imdbID !== movie.imdbID
 				);
-				setWatchedMovies(newWatchedMovies);
 				localStorage.setItem("watchedMovies", JSON.stringify(newWatchedMovies));
+				return newWatchedMovies;
 			} else {
-				const newWatchedMovies = [...watchedMovies, movie];
-				setWatchedMovies(newWatchedMovies);
+				const newWatchedMovies = [...prevWatchedMovies, movie];
 				localStorage.setItem("watchedMovies", JSON.stringify(newWatchedMovies));
+				return newWatchedMovies;
 			}
-		}
+		});
 	};
 
 	return (
@@ -96,7 +100,7 @@ export default function MovieCard(props: MovieCardProps) {
 							color={"white"}
 							onClick={(e) => {
 								e.preventDefault();
-								handleBookmarkClick(props.movie, "bookmark");
+								handleBookmarkClick(props.movie);
 							}}
 						>
 							<Icon
@@ -137,7 +141,7 @@ export default function MovieCard(props: MovieCardProps) {
 							color={"white"}
 							onClick={(e) => {
 								e.preventDefault();
-								handleBookmarkClick(props.movie, "watched");
+								handleWatchedClick(props.movie);
 							}}
 						>
 							<Icon

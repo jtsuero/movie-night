@@ -8,7 +8,6 @@ import {
 	chakra,
 	useColorModeValue,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { RiEyeFill, RiEyeLine } from "react-icons/ri";
 
@@ -16,69 +15,13 @@ import { Movie } from "../api/movies/route";
 
 interface MovieCardProps {
 	movie: Movie;
+	bookmarkedMovies: Movie[];
+	watchedMovies: Movie[];
+	handleWatchedClick: (movie: Movie) => void;
+	handleBookmarkClick: (movie: Movie) => void;
 }
 
 export default function MovieCard(props: MovieCardProps) {
-	const [bookmarkedMovies, setBookmarkedMovies] = useState<Movie[]>(() => {
-		const storedBookmarkedMovies = localStorage.getItem("bookmarkedMovies");
-		if (storedBookmarkedMovies) {
-			return JSON.parse(storedBookmarkedMovies);
-		}
-		return [];
-	});
-
-	const [watchedMovies, setWatchedMovies] = useState<Movie[]>(() => {
-		const storedWatchedMovies = localStorage.getItem("watchedMovies");
-		if (storedWatchedMovies) {
-			return JSON.parse(storedWatchedMovies);
-		}
-		return [];
-	});
-
-	const handleBookmarkClick = (movie: Movie) => {
-		setBookmarkedMovies((prevBookmarkedMovies) => {
-			const isBookmarked = prevBookmarkedMovies.some(
-				(bookmarkedMovie) => bookmarkedMovie.imdbID === movie.imdbID
-			);
-			if (isBookmarked) {
-				const newBookmarkedMovies = prevBookmarkedMovies.filter(
-					(bookmarkedMovie) => bookmarkedMovie.imdbID !== movie.imdbID
-				);
-				localStorage.setItem(
-					"bookmarkedMovies",
-					JSON.stringify(newBookmarkedMovies)
-				);
-				return newBookmarkedMovies;
-			} else {
-				const newBookmarkedMovies = [...prevBookmarkedMovies, movie];
-				localStorage.setItem(
-					"bookmarkedMovies",
-					JSON.stringify(newBookmarkedMovies)
-				);
-				return newBookmarkedMovies;
-			}
-		});
-	};
-
-	const handleWatchedClick = (movie: Movie) => {
-		setWatchedMovies((prevWatchedMovies) => {
-			const isWatched = prevWatchedMovies.some(
-				(watchedMovie) => watchedMovie.imdbID === movie.imdbID
-			);
-			if (isWatched) {
-				const newWatchedMovies = prevWatchedMovies.filter(
-					(watchedMovie) => watchedMovie.imdbID !== movie.imdbID
-				);
-				localStorage.setItem("watchedMovies", JSON.stringify(newWatchedMovies));
-				return newWatchedMovies;
-			} else {
-				const newWatchedMovies = [...prevWatchedMovies, movie];
-				localStorage.setItem("watchedMovies", JSON.stringify(newWatchedMovies));
-				return newWatchedMovies;
-			}
-		});
-	};
-
 	return (
 		<div key={props.movie.imdbID}>
 			<Flex p={50} w='full' alignItems='center' justifyContent='center'>
@@ -100,12 +43,12 @@ export default function MovieCard(props: MovieCardProps) {
 							color={"white"}
 							onClick={(e) => {
 								e.preventDefault();
-								handleBookmarkClick(props.movie);
+								props.handleBookmarkClick(props.movie);
 							}}
 						>
 							<Icon
 								as={
-									bookmarkedMovies.some(
+									props.bookmarkedMovies.some(
 										(bookmarkedMovie) =>
 											bookmarkedMovie.imdbID === props.movie.imdbID
 									)
@@ -120,7 +63,7 @@ export default function MovieCard(props: MovieCardProps) {
 					</Tooltip>
 					<Tooltip
 						label={
-							watchedMovies.some(
+							props.watchedMovies.some(
 								(watchedMovie) => watchedMovie.imdbID === props.movie.imdbID
 							)
 								? "Mark as unwatched"
@@ -141,12 +84,12 @@ export default function MovieCard(props: MovieCardProps) {
 							color={"white"}
 							onClick={(e) => {
 								e.preventDefault();
-								handleWatchedClick(props.movie);
+								props.handleWatchedClick(props.movie);
 							}}
 						>
 							<Icon
 								as={
-									watchedMovies.some(
+									props.watchedMovies.some(
 										(watchedMovie) => watchedMovie.imdbID === props.movie.imdbID
 									)
 										? RiEyeFill

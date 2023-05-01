@@ -1,21 +1,38 @@
 "use client";
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { Movie } from "../api/movies/route";
 import MovieCard from "../components/MovieCard";
+import { useMovieManager } from "../store";
 
 export default function Bookmarks() {
-	const [bookmarkedMovies, setBookmarkedMovies] = useState<Movie[]>([]);
-	const [movieList, setMovieList] = useState<Movie[]>([]);
+	const [bookmarkedMovies, addBookmarkedMovie, removeBookmarkedMovie] =
+		useMovieManager("bookmarkedMovies");
 
-	useEffect(() => {
-		const bookmarkedMoviesFromLocalStorage = JSON.parse(
-			localStorage.getItem("bookmarkedMovies") || "[]"
+	const [watchedMovies, addWatchedMovie, removeWatchedMovie] =
+		useMovieManager("watchedMovies");
+
+	const handleBookmarkClick = (movie: Movie) => {
+		const isBookmarked = bookmarkedMovies.some(
+			(bookmarkedMovie) => bookmarkedMovie.imdbID === movie.imdbID
 		);
-		setBookmarkedMovies(bookmarkedMoviesFromLocalStorage);
-	}, []);
+		if (isBookmarked) {
+			removeBookmarkedMovie(movie);
+		} else {
+			addBookmarkedMovie(movie);
+		}
+	};
 
-	console.log(bookmarkedMovies, "test bookmark");
+	const handleWatchedClick = (movie: Movie) => {
+		const isWatched = watchedMovies.some(
+			(watchedMovie) => watchedMovie.imdbID === movie.imdbID
+		);
+		if (isWatched) {
+			removeWatchedMovie(movie);
+		} else {
+			addWatchedMovie(movie);
+		}
+	};
+
 	return (
 		<Stack
 			as={Box}
@@ -42,7 +59,14 @@ export default function Bookmarks() {
 				}}
 			>
 				{bookmarkedMovies.map((movie) => (
-					<MovieCard key={movie.imdbID} movie={movie} />
+					<MovieCard
+						key={movie.imdbID}
+						movie={movie}
+						bookmarkedMovies={bookmarkedMovies}
+						watchedMovies={watchedMovies}
+						handleBookmarkClick={handleBookmarkClick}
+						handleWatchedClick={handleWatchedClick}
+					/>
 				))}
 			</ul>
 		</Stack>

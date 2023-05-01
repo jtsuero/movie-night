@@ -1,6 +1,3 @@
-// 	title: "Movie Night",
-// 	description: "What you watching?",
-// };
 "use client";
 import { useState } from "react";
 import { Movie, searchMoviesByTitle } from "./api/movies/route";

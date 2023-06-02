@@ -1,6 +1,8 @@
-Project built in a weekend for a frontend coding assignment.
+Project built in a weekend for a frontend coding assignment. 
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Can see working version here - movie-night-nv9d.vercel.app/
+
+Built with [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`] and hosted with [Vercel](https://vercel.com).
 
 ## Getting Started
 
